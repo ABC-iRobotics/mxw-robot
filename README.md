@@ -1,22 +1,5 @@
 # mxw_robot_component
 Maxwhere module written in nodejs, to visualize and control "any" robot from Robot Operating System
-# This branch contains hand gesture control implemented using the leap motion javascript sdk
-
-This control is based on the follwing SDK:
-
-https://developer.leapmotion.com/documentation/v2/javascript/index.html
-
-The MAXWHERE camera is controlled by the first hand:
-
-* **Tilt** your hand left or right to move left or right
-* **Tilt** your hand upwards of downwards to move up or down
-* **Move** your hand forward or backward to move forward or backward
-
-Your second hand controlls a robot (both joint_states and trajectory control implemented)
-
-Show the binary number of the joint you would like to turn (for example open thumb and all other finger closed moves the first joint, forefinger open and all other closed is two etc.)
-
-Then **tilt** your hand to move the joint.
 
 
 ![alt text](https://github.com/nemesgyadam/mxw_robot_component/blob/master/iiwa.JPG "KUKA IIWA with controller")
