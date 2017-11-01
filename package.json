@@ -1,0 +1,27 @@
+{
+  "name": "mxw-robot",
+  "version": "1.0.0",
+  "description": "Maxwhere component to visualize and control robots from ROS",
+  "main": "index.js",
+  "scripts": {
+    "test": "maxwhere run ./app.js --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nemesgyadam/mxw_robot_component.git"
+  },
+  "keywords": [
+    "mxw",
+    "maxwhere",
+    "ROS",
+    "robotwebtools",
+    "robot",
+    "industrial_robot"
+  ],
+  "author": "Adam Gyula Nemes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nemesgyadam/mxw_robot_component/issues"
+  },
+  "homepage": "https://github.com/nemesgyadam/mxw_robot_component#readme"
+}

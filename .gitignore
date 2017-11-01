@@ -1,0 +1,10 @@
+resources/*
+!resources/background.jpg
+!resources/background2.jpg
+!resources/control.html
+!resources/control_script.js
+!resources/images.jpg
+!resources/joint_controller.html
+!resources/messages.js
+!resources/script.js
+!resources/settings.txt
