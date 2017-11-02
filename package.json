@@ -1,6 +1,6 @@
 {
   "name": "mxw-robot",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "description": "Maxwhere component to visualize and control robots from ROS",
   "main": "index.js",
   "scripts": {
@@ -23,5 +23,15 @@
   "bugs": {
     "url": "https://github.com/nemesgyadam/mxw_robot_component/issues"
   },
-  "homepage": "https://github.com/nemesgyadam/mxw_robot_component#readme"
+  "homepage": "https://github.com/nemesgyadam/mxw_robot_component#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+	"webpack":"2.7.0",
+	"mkdirp":"0.5.1"
+  },
+  "scripts": {
+  "deploy": "node scripts/deploy.js"
+}
 }

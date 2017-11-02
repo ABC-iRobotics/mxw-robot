@@ -1,5 +1,7 @@
 const ROSLIB = require('./dep/roslib')
-const fs = require('./dep/graceful-fs')
+
+const fs = require('fs')
+
 var ipcMain
 var nextID = 0
 var robots = []
