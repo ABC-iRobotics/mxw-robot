@@ -1,6 +1,7 @@
 # mxw_robot_component
 Maxwhere module written in nodejs, to visualize and control "any" robot from Robot Operating System
 
+Check example_app.js for usage
 
 ![alt text](https://github.com/nemesgyadam/mxw_robot_component/blob/master/iiwa.JPG "KUKA IIWA with controller")
 
