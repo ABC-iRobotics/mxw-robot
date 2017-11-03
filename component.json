@@ -1,0 +1,5 @@
+{
+  "name": "mxw-robot"
+  , "main": "bundle.js"
+  , "resources": "./resources"
+}

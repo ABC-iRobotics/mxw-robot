@@ -1,7 +1,6 @@
-const ROSLIB = require('./dep/roslib')
-
+// const ROSLIB = require('./dep/roslib')
+const ROSLIB = require('roslib')
 const fs = require('fs')
-
 var ipcMain
 var nextID = 0
 var robots = []
@@ -107,16 +106,16 @@ class MxwRobot {
               var originalMesh = file[file.length - 1].split('.')
               var mesh = urdfModel.name + '/' + originalMesh[0] + '.mesh'
 
-              if (!fs.existsSync(`${__dirname}/resources/` + mesh)) {
+              /* if (!fs.existsSync(`${__dirname}/resources/` + mesh)) {
                 console.log('Mesh unavailable ' + mesh + ' Please place it into the resource folder of the component')
                 ControlerLog(robot.id, 'Mesh unavailable ' + mesh + ' Please place it into the resource folder of the component')
-              } else {
-                links[l] = <mesh
-                  originxyz={originxyz}
-                  url={mesh}
+              } else { */
+              links[l] = <mesh
+                originxyz={originxyz}
+                url={mesh}
                 />
-                break
-              }
+              break
+              // }
           }
         }
       }
@@ -159,34 +158,57 @@ class MxwRobot {
 module.exports = {
   resources: `${__dirname}/resources`,
   init () {
-
+    console.log('inti...')
   },
   done (r) {
-
+    console.log('done...')
   },
   render (options) {
-    var settings = JSON.parse(fs.readFileSync(`${__dirname}/resources/` + options.file))
+    console.log('render...')
+    // var settings = JSON.parse(fs.readFileSync(`${__dirname}/resources/` + options.file))
+    var settings = {'auto_load': 1,
+      'show_controller': 1,
+      'show_joint_controller': 1,
+      'debug_controller': 0,
+      'debug_joint_controller': 0,
+      'robots': [
+    {'ROS_IP': '193.224.41.168:9090', 'position': { 'x': 100, 'y': 0, 'z': 0 }, 'rate': 60, 'BaseLink': 'base_link', 'zoom': 100, 'scale': 1}
+      ]
+    }
+    console.log('1')
     wom = options.mxwWom
     ipcMain = options.mxwApp
     autoLoad = settings.auto_load
     showController = settings.show_controller
+    console.log('2')
     showJointController = settings.show_joint_controller
     debugController = settings.debug_controller
     debugJointController = settings.debug_joint_controller
+    console.log('3')
     settings.robots.forEach(function (element) {
+      console.log('4')
       var options = element
+      console.log('41')
       var id = nextID
+      console.log('42')
       nextID++
+      console.log('43')
       if (showController) { createController(id, options) }
+      console.log('44')
       if (autoLoad) {
         robots[id] = new MxwRobot(options, id)
       }
     }, this)
+    console.log('5')
     return <node />
   }
 }
 function createController (id, options) {
+  console.log('createing controller 1')
   var url = `${__dirname}/resources/control.html?id=` + id + '&ip=' + options.ROS_IP
+  console.log('creating controller 2')
+  wom.render(<node />)
+  console.log('creating cntoler 21')
   wom.render(<node
     id={'controlnode' + id}
     position={{ x: parseInt(options.position.x) - 20, y: parseInt(options.position.y) + 50, z: parseInt(options.position.z) + 100 }}
@@ -196,13 +218,13 @@ function createController (id, options) {
     <browser
       id={'control' + id}
       url={url}
-      nodeIntegration
       pdf={false}
       done={b => {
         if (debugController) { if (b.webview && id === 1) { b.nativeRender.browserWindow.webContents.openDevTools({ detach: true }) } }
       }}
       />
   </node>)
+  console.log('creating controller 3')
   ipcMain.on('asynchronous-message', (event, arg) => {
     if (arg === 'ready') { ControlerSendOptions(id, options) }
     var command = arg.split('||')
@@ -227,7 +249,7 @@ function createController (id, options) {
       browsernode.setPosition(parseFloat(command[2]), parseFloat(command[3]) + 50, parseFloat(command[4]) + 100)
     }
   })
-} 
+}
 function createJointController (robot) {
   var jointurl = `${__dirname}/resources/joint_controller.html?id=` + robot.id + '&ip=' + robot.ROS_IP
   robot.parent.render(<node
@@ -242,7 +264,6 @@ function createJointController (robot) {
     <browser
       id={'jointcontrol' + robot.id}
       url={jointurl}
-      nodeIntegration
       pdf={false}
       done={b => {
         if (debugJointController) if (b.webview && robot.id === 1) { b.nativeRender.browserWindow.webContents.openDevTools({ detach: true }) }
