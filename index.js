@@ -1,4 +1,3 @@
-// const ROSLIB = require('./dep/roslib')
 const ROSLIB = require('roslib')
 const fs = require('fs')
 var ipcMain

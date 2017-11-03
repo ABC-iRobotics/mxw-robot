@@ -1,5 +1,7 @@
 resources/*
-nodemodules/*
+node_modules/*
+deploy/*
+dep/*
 !resources/background.jpg
 !resources/background2.jpg
 !resources/control.html

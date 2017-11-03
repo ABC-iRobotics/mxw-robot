@@ -11,7 +11,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         query: {
-          plugins: [['transform-jsx-except-react', { function: 'jsxFactory' }]],
+          plugins: [['transform-jsx-except-react', { function: 'jsxFactory', callStyle: 'individual' }]],
           presets: ['react']
         }
 

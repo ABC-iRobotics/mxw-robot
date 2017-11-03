@@ -2934,7 +2934,9 @@ class MxwRobot {
     this.scale = options.scale || 1;
     this.zoom = options.zoom || 1;
     this.id = id;
-    this.parent = jsxFactory({
+    this.parent = function (args) {
+      return jsxFactory(args.elementName, args.attributes, args.children);
+    }({
       elementName: 'node',
       attributes: {
         position: this.position,
@@ -3006,34 +3008,34 @@ class MxwRobot {
           var originxyz = origin.x + ' ' + origin.y + ' ' + origin.z;
           switch (visual.geometry.type) {
             case ROSLIB.URDF_BOX:
-              links[l] = jsxFactory({
+              links[l] = {
                 elementName: 'mesh',
                 attributes: {
                   originxyz: originxyz,
                   url: 'N_Aux_Cube.mesh'
                 },
                 children: null
-              });
+              };
               break;
             case ROSLIB.URDF_CYLINDER:
-              links[l] = jsxFactory({
+              links[l] = {
                 elementName: 'mesh',
                 attributes: {
                   originxyz: originxyz,
                   url: 'N_Cylinder.mesh'
                 },
                 children: null
-              });
+              };
               break;
             case ROSLIB.URDF_SPHERE:
-              links[l] = jsxFactory({
+              links[l] = {
                 elementName: 'mesh',
                 attributes: {
                   originxyz: originxyz,
                   url: 'N_Sphere.mesh'
                 },
                 children: null
-              });
+              };
               break;
             default:
               var file = visual.geometry.filename.split('/');
@@ -3044,14 +3046,14 @@ class MxwRobot {
                 console.log('Mesh unavailable ' + mesh + ' Please place it into the resource folder of the component')
                 ControlerLog(robot.id, 'Mesh unavailable ' + mesh + ' Please place it into the resource folder of the component')
               } else { */
-              links[l] = jsxFactory({
+              links[l] = {
                 elementName: 'mesh',
                 attributes: {
                   originxyz: originxyz,
                   url: mesh
                 },
                 children: null
-              });
+              };
               break;
             // }
           }
@@ -3144,24 +3146,24 @@ module.exports = {
       }
     }, this);
     console.log('5');
-    return jsxFactory({
+    return {
       elementName: 'node',
       attributes: {},
       children: null
-    });
+    };
   }
 };
 function createController(id, options) {
   console.log('createing controller 1');
   var url = `${__dirname}/resources/control.html?id=` + id + '&ip=' + options.ROS_IP;
   console.log('creating controller 2');
-  wom.render(jsxFactory({
+  wom.render({
     elementName: 'node',
     attributes: {},
     children: null
-  }));
+  });
   console.log('creating cntoler 21');
-  wom.render(jsxFactory({
+  wom.render({
     elementName: 'node',
     attributes: {
       id: 'controlnode' + id,
@@ -3169,7 +3171,7 @@ function createController(id, options) {
       scale: { x: 0.03, y: 0.03, z: 0.03 },
       orientation: { w: 0.924, x: -0.383, y: 0, z: 0 }
     },
-    children: [jsxFactory({
+    children: [{
       elementName: 'browser',
       attributes: {
         id: 'control' + id,
@@ -3184,8 +3186,8 @@ function createController(id, options) {
         }
       },
       children: null
-    })]
-  }));
+    }]
+  });
   console.log('creating controller 3');
   ipcMain.on('asynchronous-message', (event, arg) => {
     if (arg === 'ready') {
@@ -3215,7 +3217,7 @@ function createController(id, options) {
 }
 function createJointController(robot) {
   var jointurl = `${__dirname}/resources/joint_controller.html?id=` + robot.id + '&ip=' + robot.ROS_IP;
-  robot.parent.render(jsxFactory({
+  robot.parent.render({
     elementName: 'node',
     attributes: {
       id: 'jointnode' + robot.id,
@@ -3226,7 +3228,7 @@ function createJointController(robot) {
         b.setScale(0.03 / robot.scale, 0.03 / robot.scale, 0.03 / robot.scale);
       }
     },
-    children: [jsxFactory({
+    children: [{
       elementName: 'browser',
       attributes: {
         id: 'jointcontrol' + robot.id,
@@ -3239,8 +3241,8 @@ function createJointController(robot) {
         }
       },
       children: null
-    })]
-  }));
+    }]
+  });
 }
 
 function ControlerSendOptions(id, options) {
