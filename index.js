@@ -1,6 +1,8 @@
 const ROSLIB = require('roslib')
+const { ipcMain } = require('electron')
+const { wom } = require('maxwhere')
 const fs = require('fs')
-var ipcMain
+// var ipcMain
 var nextID = 0
 var robots = []
 var showJointController = false
@@ -8,7 +10,7 @@ var debugController = false
 var debugJointController = false
 var autoLoad = false
 var showController = false
-var wom
+// var wom
 class MxwRobot {
   constructor (options, id) {
     this.ROS_IP = options.ROS_IP
@@ -18,16 +20,19 @@ class MxwRobot {
     this.scale = options.scale || 1
     this.zoom = options.zoom || 1
     this.id = id
+    console.log('robot 1')
     this.parent = (<node
       position={this.position}
       orientation={{ w: 0.707, x: -0.707, y: 0, z: 0 }}
       scale={this.scale}
       />)
+    console.log('robot 2')
     this.ros = new ROSLIB.Ros({
       url: 'ws://' + this.ROS_IP
     })
+    console.log('robot 3')
     var robot = this
-
+    console.log('robot 4')
     this.ros.on('connection', function () {
       console.log('Connected to websocket server.' + options.ROS_IP)
       ControlerLog(id, 'Connected to websocket server.' + options.ROS_IP)
@@ -104,17 +109,16 @@ class MxwRobot {
               var file = visual.geometry.filename.split('/')
               var originalMesh = file[file.length - 1].split('.')
               var mesh = urdfModel.name + '/' + originalMesh[0] + '.mesh'
-
-              /* if (!fs.existsSync(`${__dirname}/resources/` + mesh)) {
+              if (!fs.existsSync(`${__dirname}/resources/` + mesh)) {
                 console.log('Mesh unavailable ' + mesh + ' Please place it into the resource folder of the component')
                 ControlerLog(robot.id, 'Mesh unavailable ' + mesh + ' Please place it into the resource folder of the component')
-              } else { */
-              links[l] = <mesh
-                originxyz={originxyz}
-                url={mesh}
+              } else {
+                links[l] = <mesh
+                  originxyz={originxyz}
+                  url={mesh}
                 />
-              break
-              // }
+                break
+              }
           }
         }
       }
@@ -164,19 +168,20 @@ module.exports = {
   },
   render (options) {
     console.log('render...')
-    // var settings = JSON.parse(fs.readFileSync(`${__dirname}/resources/` + options.file))
-    var settings = {'auto_load': 1,
+
+    var settings = JSON.parse(fs.readFileSync(`${__dirname}/resources/` + options.file))
+    /* var settings = {'auto_load': 1,
       'show_controller': 1,
       'show_joint_controller': 1,
       'debug_controller': 0,
       'debug_joint_controller': 0,
       'robots': [
-    {'ROS_IP': '193.224.41.168:9090', 'position': { 'x': 100, 'y': 0, 'z': 0 }, 'rate': 60, 'BaseLink': 'base_link', 'zoom': 100, 'scale': 1}
+    {'ROS_IP': '127.0.0.1:9090', 'position': { 'x': 100, 'y': 0, 'z': 0 }, 'rate': 60, 'BaseLink': 'base_link', 'zoom': 100, 'scale': 1}
       ]
-    }
+    } */
     console.log('1')
-    wom = options.mxwWom
-    ipcMain = options.mxwApp
+    /* wom = options.mxwWom
+    ipcMain = options.mxwApp */
     autoLoad = settings.auto_load
     showController = settings.show_controller
     console.log('2')
@@ -205,6 +210,7 @@ module.exports = {
 function createController (id, options) {
   console.log('createing controller 1')
   var url = `${__dirname}/resources/control.html?id=` + id + '&ip=' + options.ROS_IP
+  // var url = `http://ros.nemespc.hu/control.html?id=` + id + '&ip=' + options.ROS_IP
   console.log('creating controller 2')
   wom.render(<node />)
   console.log('creating cntoler 21')
@@ -251,6 +257,7 @@ function createController (id, options) {
 }
 function createJointController (robot) {
   var jointurl = `${__dirname}/resources/joint_controller.html?id=` + robot.id + '&ip=' + robot.ROS_IP
+  // var jointurl = `http://ros.nemespc.hu/joint_controller.html?id=` + robot.id + '&ip=' + robot.ROS_IP
   robot.parent.render(<node
     id={'jointnode' + robot.id}
     done={b => {
