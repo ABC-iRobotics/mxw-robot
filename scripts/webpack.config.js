@@ -4,7 +4,7 @@ module.exports = {
   target: 'electron-main',
   entry: './index.js',
   output: {
-    filename: './deploy/index.js',
+    filename: './mxw-robot/index.js',
     libraryTarget: 'this'
   },
   module: {
