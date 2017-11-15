@@ -11,11 +11,23 @@ Check example_app.js for usage
 
 # Usage:
 npm install
+
 npm run deploy
-Create the generated mxw-robot folder[..\Glassy\resources\mxw-app.asar.unpacked\static\scenes\1_3_x\glassy\components]
+
+Copy the generated mxw-robot folder into
+[..\resources\mxw-app.asar.unpacked\static\scenes\1_3_x\glassy\components]
 
 Copy the robot meshes to the correct folder
 
+Edit index.jsx:\
+Add the following into the root tag
+[<mxw-robot file='settings.json'/>]
+Edit where.json:\
+Add
+
+["mxw-robot" : "./components/mxw-robot/component.json" ] 
+
+to components tag (create tag if not exists)
 ### In maxwhere app:
 const robot = require('./components/robot')
 wom.installComponent(require('./components/robot'), 'robot')

@@ -11,6 +11,6 @@ mxw-robot/*
 !resources/joint_controller.html
 !resources/messages.js
 !resources/script.js
-!resources/settings.txt
+!resources/settings.json
 !resources/eventemitter2.js
 !resources/roslib.js

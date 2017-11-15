@@ -1,0 +1,9 @@
+{"auto_load":1,
+"show_controller":1,
+"show_joint_controller":1,
+"debug_controller":0,
+"debug_joint_controller":0,
+"robots":[
+{"ROS_IP":"10.0.97.2:9090", "position":{ "x": 100, "y": 0, "z": 0 }, "rate":60, "BaseLink":"base_link", "zoom":100, "scale":1}
+]
+}
