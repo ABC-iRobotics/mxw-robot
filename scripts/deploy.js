@@ -6,12 +6,12 @@ var path = require('path')
 var wrench = require('wrench')
 console.log('Fixing ws version...')
 deleteFolder(path.join(__dirname, '/../node_modules/roslib/node_modules/ws'))
-mkdirp('/deploy', function () {
+mkdirp('/mxw-robot', function () {
   let compiler = webpack(configuration)
   compiler.apply(new webpack.ProgressPlugin())
   console.log('Creating bundle file...')
   compiler.run(function () {
-    var data = fs.readFileSync('./deploy/index.js', 'utf-8')
+    var data = fs.readFileSync('./mxw-robot/index.js', 'utf-8')
     console.log('Fixing maxwhere require...')
     var newValue = data.replace(/^const { wom } =.*$/m, 'const { wom } =require(\'maxwhere\')')
 
@@ -23,10 +23,10 @@ mkdirp('/deploy', function () {
 
     console.log('Fixing nodeIntegratin...')
     newValue = newValue.replace('pdf: false', 'nodeIntegration: true, \n pdf: false')
-    fs.writeFileSync('./deploy/index.js', newValue, 'utf-8')
+    fs.writeFileSync('./mxw-robot/index.js', newValue, 'utf-8')
     console.log('Copying resources...')
-    wrench.copyDirSyncRecursive('./resources', './deploy/resources')
-    fs.writeFile('./deploy/component.json', '{ \n "name": "mxw-robot"  ,\n "main": "index.js",\n "resources": "./components/mxw-robot/resources" \n }', function (err) {
+    wrench.copyDirSyncRecursive('./resources', './mxw-robot/resources')
+    fs.writeFile('./mxw-robot/component.json', '{ \n "name": "mxw-robot"  ,\n "main": "index.js",\n "resources": "./components/mxw-robot/resources" \n }', function (err) {
       if (err) {
         return console.log(err)
       }

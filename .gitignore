@@ -2,6 +2,7 @@ resources/*
 node_modules/*
 deploy/*
 dep/*
+mxw-robot/*
 !resources/background.jpg
 !resources/background2.jpg
 !resources/control.html

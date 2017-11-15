@@ -10,7 +10,11 @@ Check example_app.js for usage
 ![alt text](https://github.com/nemesgyadam/mxw_robot_component/blob/master/cloud_robots.JPG "Robots running in cloud computer")
 
 # Usage:
-Copy the module to components/robot folder (which is next to your app.js)
+npm install
+npm run deploy
+Create the generated mxw-robot folder[..\Glassy\resources\mxw-app.asar.unpacked\static\scenes\1_3_x\glassy\components]
+
+Copy the robot meshes to the correct folder
 
 ### In maxwhere app:
 const robot = require('./components/robot')
