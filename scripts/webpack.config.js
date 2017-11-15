@@ -4,7 +4,7 @@ module.exports = {
   target: 'electron-main',
   entry: './index.js',
   output: {
-    filename: './bundle.js',
+    filename: './deploy/index.js',
     libraryTarget: 'this'
   },
   module: {

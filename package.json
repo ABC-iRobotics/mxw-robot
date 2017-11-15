@@ -42,6 +42,7 @@
     "jsxhint-loader": "^0.2.0",
     "mkdirp": "0.5.1",
     "webpack": "2.7.0",
-	"imports-loader": "0.7.1"
+	"imports-loader": "0.7.1",
+	"wrench": "v1.5.9"
   }
 }

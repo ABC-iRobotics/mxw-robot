@@ -165,7 +165,7 @@ function init () {
 			 var div = document.createElement('div')
 			 var step = (joint.maxval - joint.minval) / 100
 			 div.innerHTML =
-			' <div><p class="title">' + joint.name + '</p>	<input  value=0  id="slider_' + joint.name + '" onchange="SliderChange(this,this.value)" type="range" min="' + joint.minval + '" max="' + joint.maxval + '" step="' + step + '"><input type="number" value=0 onchange="NumberChange(this.id,this.value)" min="' + joint.minval + '" max="' + joint.maxval + '" step="' + step + '" id="slider_value_' + joint.name + '"></div> '
+			' <div><p class="title">' + joint.name + '</p>	<input  value=0  id="slider_' + joint.name + '" oninput="SliderChange(this,this.value)" type="range" min="' + joint.minval + '" max="' + joint.maxval + '" step="' + step + '"><input type="number" value=0 oninput="NumberChange(this.id,this.value)" min="' + joint.minval + '" max="' + joint.maxval + '" step="' + step + '" id="slider_value_' + joint.name + '"></div> '
    container.appendChild(div)
  }
    }

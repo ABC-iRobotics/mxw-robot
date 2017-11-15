@@ -11,3 +11,5 @@ dep/*
 !resources/messages.js
 !resources/script.js
 !resources/settings.txt
+!resources/eventemitter2.js
+!resources/roslib.js
