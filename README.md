@@ -1,7 +1,7 @@
 # mxw_robot_component
 Maxwhere module written in nodejs, to visualize and control "any" robot from Robot Operating System
 
-Check example_app.js for usage
+
 
 ![alt text](https://github.com/nemesgyadam/mxw_robot_component/blob/master/iiwa.JPG "KUKA IIWA with controller")
 
@@ -28,17 +28,7 @@ Add
 ["mxw-robot" : "./components/mxw-robot/component.json" ] 
 
 to components tag (create tag if not exists)
-### In maxwhere app:
-const robot = require('./components/robot')
-wom.installComponent(require('./components/robot'), 'robot')
 
-Add the robot node to your app (for example to the wom load ready function), and specify your settings file:
-
-  ```
-  wom.render(<robot file='settings.txt' controller={controller}
-  />)
-  ```
-  
   ### Config
   Createing settings file (location /robot/resources/):
   Parameters:

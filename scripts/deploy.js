@@ -26,7 +26,7 @@ mkdirp('/mxw-robot', function () {
     fs.writeFileSync('./mxw-robot/index.js', newValue, 'utf-8')
     console.log('Copying resources...')
     wrench.copyDirSyncRecursive('./resources', './mxw-robot/resources')
-    fs.writeFile('./mxw-robot/component.json', '{ \n "name": "mxw-robot"  ,\n "main": "index.js",\n "resources": "./components/mxw-robot/resources" \n }', function (err) {
+    fs.writeFile('./mxw-robot/component.json', '{ \n "name": "mxw-robot"  ,\n "main": "index.js",\n "resources": "./resources" \n }', function (err) {
       if (err) {
         return console.log(err)
       }

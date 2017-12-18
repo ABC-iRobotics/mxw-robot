@@ -2,7 +2,6 @@ const ROSLIB = require('roslib')
 const { ipcMain } = require('electron')
 const { wom } = require('maxwhere')
 const fs = require('fs')
-// var ipcMain
 var nextID = 0
 var robots = []
 var showJointController = false
@@ -10,7 +9,6 @@ var debugController = false
 var debugJointController = false
 var autoLoad = false
 var showController = false
-// var wom
 class MxwRobot {
   constructor (options, id) {
     this.ROS_IP = options.ROS_IP
@@ -20,19 +18,15 @@ class MxwRobot {
     this.scale = options.scale || 1
     this.zoom = options.zoom || 1
     this.id = id
-    console.log('robot 1')
     this.parent = (<node
       position={this.position}
       orientation={{ w: 0.707, x: -0.707, y: 0, z: 0 }}
       scale={this.scale}
       />)
-    console.log('robot 2')
     this.ros = new ROSLIB.Ros({
       url: 'ws://' + this.ROS_IP
     })
-    console.log('robot 3')
     var robot = this
-    console.log('robot 4')
     this.ros.on('connection', function () {
       console.log('Connected to websocket server.' + options.ROS_IP)
       ControlerLog(id, 'Connected to websocket server.' + options.ROS_IP)
@@ -44,7 +38,6 @@ class MxwRobot {
       robot.ros.close()
       delete robots[this.id]
     })
-
     this.ros.on('close', function () {
       console.log('Connection to websocket server closed.')
       ControlerLog(id, 'Connection to websocket server closed.')
@@ -170,7 +163,9 @@ module.exports = {
     console.log('render...')
 
     var settings = JSON.parse(fs.readFileSync(`${__dirname}/resources/` + options.file))
-    /* var settings = {'auto_load': 1,
+    /*
+      -------------------------------EXAMPLE settings-json-----------------------------------
+      var settings = {'auto_load': 1,
       'show_controller': 1,
       'show_joint_controller': 1,
       'debug_controller': 0,
@@ -179,41 +174,30 @@ module.exports = {
     {'ROS_IP': '127.0.0.1:9090', 'position': { 'x': 100, 'y': 0, 'z': 0 }, 'rate': 60, 'BaseLink': 'base_link', 'zoom': 100, 'scale': 1}
       ]
     } */
-    console.log('1')
-    /* wom = options.mxwWom
-    ipcMain = options.mxwApp */
     autoLoad = settings.auto_load
     showController = settings.show_controller
-    console.log('2')
     showJointController = settings.show_joint_controller
     debugController = settings.debug_controller
     debugJointController = settings.debug_joint_controller
-    console.log('3')
+
     settings.robots.forEach(function (element) {
-      console.log('4')
       var options = element
-      console.log('41')
       var id = nextID
-      console.log('42')
       nextID++
-      console.log('43')
       if (showController) { createController(id, options) }
-      console.log('44')
       if (autoLoad) {
         robots[id] = new MxwRobot(options, id)
       }
     }, this)
-    console.log('5')
     return <node />
   }
 }
 function createController (id, options) {
   console.log('createing controller 1')
   var url = `${__dirname}/resources/control.html?id=` + id + '&ip=' + options.ROS_IP
+  // alternative url from web server
   // var url = `http://ros.nemespc.hu/control.html?id=` + id + '&ip=' + options.ROS_IP
-  console.log('creating controller 2')
   wom.render(<node />)
-  console.log('creating cntoler 21')
   wom.render(<node
     id={'controlnode' + id}
     position={{ x: parseInt(options.position.x) - 20, y: parseInt(options.position.y) + 50, z: parseInt(options.position.z) + 100 }}
@@ -229,7 +213,6 @@ function createController (id, options) {
       }}
       />
   </node>)
-  console.log('creating controller 3')
   ipcMain.on('asynchronous-message', (event, arg) => {
     if (arg === 'ready') { ControlerSendOptions(id, options) }
     var command = arg.split('||')
@@ -257,6 +240,7 @@ function createController (id, options) {
 }
 function createJointController (robot) {
   var jointurl = `${__dirname}/resources/joint_controller.html?id=` + robot.id + '&ip=' + robot.ROS_IP
+  // alternative url from web server
   // var jointurl = `http://ros.nemespc.hu/joint_controller.html?id=` + robot.id + '&ip=' + robot.ROS_IP
   robot.parent.render(<node
     id={'jointnode' + robot.id}
