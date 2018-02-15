@@ -21,11 +21,11 @@ Copy the robot meshes to the correct folder
 
 Edit index.jsx:\
 Add the following into the root tag
-[<mxw-robot file='settings.json'/>]
+[ ```<mxw-robot file='settings.json'/> ```]
 Edit where.json:\
 Add
 
-["mxw-robot" : "./components/mxw-robot/component.json" ] 
+[ ```"mxw-robot" : "./components/mxw-robot/component.json"  ```] 
 
 to components tag (create tag if not exists)
 
