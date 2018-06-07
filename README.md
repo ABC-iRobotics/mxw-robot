@@ -154,3 +154,6 @@ https://github.com/SalvoVirga/iiwa_stack
 https://github.com/ros-industrial/fanuc
 
 !Note you must add Rosbridge, Robot State Publisher and Joint State Publisher to these projects in order to work with the module.
+
+## Acknowledgement
+The development is supperted by the New National Excellence Program of the Ministry of Human Capacities (UNKP-17-4).
