@@ -1,7 +1,5 @@
 # mxw_robot_component
-Maxwhere module written in nodejs, to visualize and control "any" robot from Robot Operating System
-
-
+MaxWhere component to visualize and remote control "any" robot via ROS (Robot Operating System)
 
 ![alt text](https://github.com/nemesgyadam/mxw_robot_component/blob/master/iiwa.JPG "KUKA IIWA with controller")
 
@@ -9,15 +7,25 @@ Maxwhere module written in nodejs, to visualize and control "any" robot from Rob
 
 ![alt text](https://github.com/nemesgyadam/mxw_robot_component/blob/master/cloud_robots.JPG "Robots running in cloud computer")
 
-# Usage:
-npm install
+# Usage
 
+## Preparation
+npm install
 npm run deploy
 
+## Copying the component into MaxWhere (depricated 1.X.X)
 Copy the generated mxw-robot folder into
 [..\resources\mxw-app.asar.unpacked\static\scenes\1_3_x\glassy\components]
 
-Copy the robot meshes to the correct folder
+Copy the robot meshes into the common resource folder.
+
+## Copying the component into MaxWhere (2.X.X)
+Copy the generated mxw-robot folder into
+[..\resources\mxw-app.asar.unpacked\static\scenes\1_3_x\glassy\components]
+
+Copy the robot meshes into the common resource folder.
+
+## Configuring the component
 
 Edit index.jsx:\
 Add the following into the root tag
