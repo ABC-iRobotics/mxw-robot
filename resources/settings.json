@@ -1,9 +1,8 @@
-{"auto_load":1,
-"show_controller":1,
-"show_joint_controller":1,
-"debug_controller":0,
-"debug_joint_controller":0,
-"robots":[
-{"ROS_IP":"127.0.0.1:9090", "position":{ "x": 100, "y": 0, "z": 0 }, "rate":60, "BaseLink":"base_link", "zoom":100, "scale":1}
-]
+{
+    "name": "mxw-robot",
+    "rosIP": "3.121.85.190:9090",
+    "position": { "x": 0, "y": 360, "z": 400 },
+    "orientation": {  "x": -0.707, "y": 0, "z": 0, "w": 0.707 },
+    "baseLink": "base_link",
+    "scale": 1
 }
