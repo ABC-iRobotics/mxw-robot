@@ -152,14 +152,13 @@ class MxwRobot {
 module.exports = {
   resources: `${__dirname}/resources`,
   init () {
-    console.log('init...')
+    console.log('mxw-robot: Init...')
   },
   done (r) {
-    console.log('done...')
+    console.log('mxw-robot: Done...')
   },
-  render (config) {
-    console.log('render...')
-    var options = JSON.parse(fs.readFileSync(`${__dirname}/resources/` + config.file))
+  render (options) {
+    console.log('mxw-robot: Render...')
     const robot = new MxwRobot(options)
     return <node />
   }
