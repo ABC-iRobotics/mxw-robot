@@ -137,9 +137,9 @@ class MxwRobot {
             let tf = message.transforms[i].transform
             let child = message.transforms[i].child_frame_id
             if (child && tf.translation && links[child]) {
-              links[child].setPosition(tf.translation.x * 100,
-                tf.translation.y * 100,
-                tf.translation.z * 100, 'absolute', 'parent')
+              links[child].setPosition(tf.translation.x * 100 / this.scale,
+                tf.translation.y * 100 / this.scale,
+                tf.translation.z * 100 / this.scale, 'absolute', 'parent')
               links[child].setOrientation(tf.rotation.w, tf.rotation.x, tf.rotation.y, tf.rotation.z, 'absolute', 'parent')
             }
           }
